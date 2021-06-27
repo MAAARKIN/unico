@@ -30,12 +30,10 @@ go tool cover -html=coverage.out
 
 # Visualize the logs
 
-Access the kibana at http://0.0.0.0:5601/app/management/kibana/indexPatterns
+Follow this steps to get logs from application
 
-click on Create index pattern
-
-write 'fluentd-*' at Index pattern name, click on next step
-
-Select @timestamp to time field and Create index pattern
-
-Access http://0.0.0.0:5601/app/discover to check all logs from application
+- Access the kibana at http://0.0.0.0:5601/app/management/kibana/indexPatterns
+- click on Create index pattern
+- Write 'fluentd-*' at Index pattern name and click on next step.
+- Select @timestamp to time field and Create index pattern
+- Access http://0.0.0.0:5601/app/discover to check all logs from application
