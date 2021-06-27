@@ -1,0 +1,13 @@
+app:
+  name: "unico API"
+  description: "API documentation for unico"
+  version: "1.0.0"
+server:
+  ip: "localhost"
+  port: "8080"
+database:
+  host: "localhost"
+  port: 5432
+  user: "postgres"
+  password: "postgres"
+  dbname: "unico"

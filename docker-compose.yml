@@ -1,0 +1,21 @@
+version: '3'
+services:
+  unico-api:
+    container_name: unico-api
+    build: .
+    environment:
+      - DATABASE_HOST=unico-db
+    ports:
+      - '8080:8080'
+    depends_on:
+      - unico-db
+
+  unico-db:
+    image: postgres:13.1
+    container_name: unico-db
+    environment:
+      - POSTGRES_DB=unico
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
