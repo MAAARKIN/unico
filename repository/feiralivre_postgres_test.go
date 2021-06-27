@@ -21,15 +21,15 @@ var feira = domain.FeiraLivre{
 	CodDist:    87,
 	Distrito:   "VILA FORMOSA",
 	CodSubPref: 26,
-	SubPref:    "ARICANDUVA-FORMOSA-CARRAO",
+	SubPrefe:   "ARICANDUVA-FORMOSA-CARRAO",
 	Regiao5:    "Leste",
 	Regiao8:    "Leste 1",
 	NomeFeira:  "VILA FORMOSA",
 	Registro:   "4041-0",
 	Logradouro: "RUA MARAGOJIPE",
-	Numero:     "S/N",
-	Bairro:     "VL FORMOSA",
-	Referencia: "TV RUA PRETORIA",
+	Numero:     nil,
+	Bairro:     nil,
+	Referencia: nil,
 }
 
 func TestGetAllFeiras(t *testing.T) {
@@ -44,7 +44,7 @@ func TestGetAllFeiras(t *testing.T) {
 	sqlxDB := sqlx.NewDb(mockDB, "sqlmock")
 
 	rows := sqlmock.NewRows(
-		[]string{"id", "long", "lat", "setcens", "areap", "coddist", "distrito", "codsubpref", "subpref", "regiao5", "regiao8", "nomefeira", "registro", "logradouro", "numero", "bairro", "referencia"},
+		[]string{"id", "long", "lat", "setcens", "areap", "coddist", "distrito", "codsubpref", "subprefe", "regiao5", "regiao8", "nomefeira", "registro", "logradouro", "numero", "bairro", "referencia"},
 	).AddRow(1, -46550164, -23558733, 355030885000091, 3550308005040, 87, "VILA FORMOSA", 26, "ARICANDUVA-FORMOSA-CARRAO", "Leste", "Leste 1", "VILA FORMOSA", "4041-0", "RUA MARAGOJIPE", "S/N", "VL FORMOSA", "TV RUA PRETORIA")
 
 	mock.ExpectQuery("^SELECT (.+) FROM feiralivre").WillReturnRows(rows)
@@ -129,7 +129,7 @@ func TestGetAllFeirasWithFilter(t *testing.T) {
 	sqlxDB := sqlx.NewDb(mockDB, "sqlmock")
 
 	rows := sqlmock.NewRows(
-		[]string{"id", "long", "lat", "setcens", "areap", "coddist", "distrito", "codsubpref", "subpref", "regiao5", "regiao8", "nomefeira", "registro", "logradouro", "numero", "bairro", "referencia"},
+		[]string{"id", "long", "lat", "setcens", "areap", "coddist", "distrito", "codsubpref", "subprefe", "regiao5", "regiao8", "nomefeira", "registro", "logradouro", "numero", "bairro", "referencia"},
 	).AddRow(1, -46550164, -23558733, 355030885000091, 3550308005040, 87, "VILA FORMOSA", 26, "ARICANDUVA-FORMOSA-CARRAO", "Leste", "Leste 1", "VILA FORMOSA", "4041-0", "RUA MARAGOJIPE", "S/N", "VL FORMOSA", "TV RUA PRETORIA")
 
 	mock.ExpectQuery("^SELECT (.+) FROM feiralivre WHERE").WillReturnRows(rows)
@@ -250,7 +250,7 @@ func TestUpdateFeira(t *testing.T) {
 	codeToBeUpdated := uint64(1)
 
 	mock.ExpectExec(regexp.QuoteMeta(`UPDATE feiralivre`)).
-		WithArgs(feira.Long, feira.Lat, feira.SetCens, feira.Areap, feira.CodDist, feira.Distrito, feira.CodSubPref, feira.SubPref, feira.Regiao5, feira.Regiao8, feira.NomeFeira, feira.Logradouro, feira.Numero, feira.Bairro, feira.Referencia, codeToBeUpdated).
+		WithArgs(feira.Long, feira.Lat, feira.SetCens, feira.Areap, feira.CodDist, feira.Distrito, feira.CodSubPref, feira.SubPrefe, feira.Regiao5, feira.Regiao8, feira.NomeFeira, feira.Logradouro, feira.Numero, feira.Bairro, feira.Referencia, codeToBeUpdated).
 		WillReturnResult(sqlmock.NewResult(1, 1))
 
 	repository := NewFeiraStorePostgres(sqlxDB)
@@ -277,7 +277,7 @@ func TestUpdateFeiraWithError(t *testing.T) {
 	codeToBeUpdated := uint64(1)
 
 	mock.ExpectExec(regexp.QuoteMeta(`UPDATE feiralivre`)).
-		WithArgs(feira.Long, feira.Lat, feira.SetCens, feira.Areap, feira.CodDist, feira.Distrito, feira.CodSubPref, feira.SubPref, feira.Regiao5, feira.Regiao8, feira.NomeFeira, feira.Logradouro, feira.Numero, feira.Bairro, feira.Referencia, codeToBeUpdated).
+		WithArgs(feira.Long, feira.Lat, feira.SetCens, feira.Areap, feira.CodDist, feira.Distrito, feira.CodSubPref, feira.SubPrefe, feira.Regiao5, feira.Regiao8, feira.NomeFeira, feira.Logradouro, feira.Numero, feira.Bairro, feira.Referencia, codeToBeUpdated).
 		WillReturnError(errors.New("internal error"))
 
 	repository := NewFeiraStorePostgres(sqlxDB)
@@ -300,7 +300,7 @@ func TestUpdateFeiraWithErrorRowsAffected(t *testing.T) {
 	codeToBeUpdated := uint64(1)
 
 	mock.ExpectExec(regexp.QuoteMeta(`UPDATE feiralivre`)).
-		WithArgs(feira.Long, feira.Lat, feira.SetCens, feira.Areap, feira.CodDist, feira.Distrito, feira.CodSubPref, feira.SubPref, feira.Regiao5, feira.Regiao8, feira.NomeFeira, feira.Logradouro, feira.Numero, feira.Bairro, feira.Referencia, codeToBeUpdated).
+		WithArgs(feira.Long, feira.Lat, feira.SetCens, feira.Areap, feira.CodDist, feira.Distrito, feira.CodSubPref, feira.SubPrefe, feira.Regiao5, feira.Regiao8, feira.NomeFeira, feira.Logradouro, feira.Numero, feira.Bairro, feira.Referencia, codeToBeUpdated).
 		WillReturnResult(sqlmock.NewErrorResult(errors.New("internal error")))
 
 	repository := NewFeiraStorePostgres(sqlxDB)
@@ -323,7 +323,7 @@ func TestUpdateFeiraWithoutRowsAffected(t *testing.T) {
 	codeToBeUpdated := uint64(1)
 
 	mock.ExpectExec(regexp.QuoteMeta(`UPDATE feiralivre`)).
-		WithArgs(feira.Long, feira.Lat, feira.SetCens, feira.Areap, feira.CodDist, feira.Distrito, feira.CodSubPref, feira.SubPref, feira.Regiao5, feira.Regiao8, feira.NomeFeira, feira.Logradouro, feira.Numero, feira.Bairro, feira.Referencia, codeToBeUpdated).
+		WithArgs(feira.Long, feira.Lat, feira.SetCens, feira.Areap, feira.CodDist, feira.Distrito, feira.CodSubPref, feira.SubPrefe, feira.Regiao5, feira.Regiao8, feira.NomeFeira, feira.Logradouro, feira.Numero, feira.Bairro, feira.Referencia, codeToBeUpdated).
 		WillReturnResult(sqlmock.NewResult(0, 0))
 
 	repository := NewFeiraStorePostgres(sqlxDB)
@@ -344,7 +344,7 @@ func TestCreateFeira(t *testing.T) {
 	sqlxDB := sqlx.NewDb(mockDB, "sqlmock")
 
 	mock.ExpectQuery(regexp.QuoteMeta(`INSERT INTO feiralivre`)).
-		WithArgs(feira.Long, feira.Lat, feira.SetCens, feira.Areap, feira.CodDist, feira.Distrito, feira.CodSubPref, feira.SubPref, feira.Regiao5, feira.Regiao8, feira.NomeFeira, feira.Registro, feira.Logradouro, feira.Numero, feira.Bairro, feira.Referencia).
+		WithArgs(feira.Long, feira.Lat, feira.SetCens, feira.Areap, feira.CodDist, feira.Distrito, feira.CodSubPref, feira.SubPrefe, feira.Regiao5, feira.Regiao8, feira.NomeFeira, feira.Registro, feira.Logradouro, feira.Numero, feira.Bairro, feira.Referencia).
 		WillReturnRows(sqlmock.NewRows([]string{"id"}).AddRow(1))
 
 	repository := NewFeiraStorePostgres(sqlxDB)
@@ -394,7 +394,7 @@ func TestGetFeira(t *testing.T) {
 
 	codeToBeRecovered := uint64(10)
 	rows := sqlmock.NewRows(
-		[]string{"id", "long", "lat", "setcens", "areap", "coddist", "distrito", "codsubpref", "subpref", "regiao5", "regiao8", "nomefeira", "registro", "logradouro", "numero", "bairro", "referencia"},
+		[]string{"id", "long", "lat", "setcens", "areap", "coddist", "distrito", "codsubpref", "subprefe", "regiao5", "regiao8", "nomefeira", "registro", "logradouro", "numero", "bairro", "referencia"},
 	).AddRow(10, -46550164, -23558733, 355030885000091, 3550308005040, 87, "VILA FORMOSA", 26, "ARICANDUVA-FORMOSA-CARRAO", "Leste", "Leste 1", "VILA FORMOSA", "4041-0", "RUA MARAGOJIPE", "S/N", "VL FORMOSA", "TV RUA PRETORIA")
 
 	mock.ExpectQuery(regexp.QuoteMeta("SELECT * FROM feiralivre WHERE id=$1")).
@@ -469,7 +469,7 @@ func TestGetFeiraByRegistro(t *testing.T) {
 
 	registroToBeRecovered := "4041-0"
 	rows := sqlmock.NewRows(
-		[]string{"id", "long", "lat", "setcens", "areap", "coddist", "distrito", "codsubpref", "subpref", "regiao5", "regiao8", "nomefeira", "registro", "logradouro", "numero", "bairro", "referencia"},
+		[]string{"id", "long", "lat", "setcens", "areap", "coddist", "distrito", "codsubpref", "subprefe", "regiao5", "regiao8", "nomefeira", "registro", "logradouro", "numero", "bairro", "referencia"},
 	).AddRow(10, -46550164, -23558733, 355030885000091, 3550308005040, 87, "VILA FORMOSA", 26, "ARICANDUVA-FORMOSA-CARRAO", "Leste", "Leste 1", "VILA FORMOSA", "4041-0", "RUA MARAGOJIPE", "S/N", "VL FORMOSA", "TV RUA PRETORIA")
 
 	mock.ExpectQuery(regexp.QuoteMeta("SELECT * FROM feiralivre WHERE registro=$1")).

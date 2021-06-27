@@ -12,7 +12,7 @@ cd unico
 docker-compose up -d
 ```
 
-The application will be available on port :8080, to access the services available from the api, you can access the url: http://localhost:8080/swagger/index.html
+The application will be available on port :8080, to access the services available from the api, you can access the url: http://localhost:8080/swagger/index.html and the UI will describe the required fields
 
 # Run coverage test
 
@@ -27,3 +27,15 @@ go tool cover -func=coverage.out
 //to see the coverage in html file
 go tool cover -html=coverage.out
 ```
+
+# Visualize the logs
+
+Access the kibana at http://0.0.0.0:5601/app/management/kibana/indexPatterns
+
+click on Create index pattern
+
+write 'fluentd-*' at Index pattern name, click on next step
+
+Select @timestamp to time field and Create index pattern
+
+Access http://0.0.0.0:5601/app/discover to check all logs from application

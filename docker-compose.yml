@@ -2,13 +2,21 @@ version: '3'
 services:
   unico-api:
     container_name: unico-api
+    
     build: .
     environment:
       - DATABASE_HOST=unico-db
     ports:
       - '8080:8080'
+    links:
+      - fluentd
     depends_on:
       - unico-db
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: :24224
+        tag: "staging"
 
   unico-db:
     image: postgres:13.1
@@ -19,3 +27,37 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - '5432:5432'
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.13.2
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      XPACK_SECURITY_ENABLED: "false"
+    links:
+      - elasticsearch:elasticsearch
+      - fluentd
+    depends_on:
+      - elasticsearch
+      - fluentd
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.2
+    ports:
+      - "9200:9200"
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+
+  fluentd:
+    build: ./fluentd
+    volumes:
+      - ./fluentd/conf:/fluentd/etc
+    links:
+      - "elasticsearch"
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+    depends_on:
+      - elasticsearch

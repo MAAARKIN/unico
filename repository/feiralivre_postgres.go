@@ -31,7 +31,6 @@ func addWhereFromOptions(query string, op map[string]interface{}) (string, []int
 	}
 
 	query += " WHERE " + strings.Join(where, " AND ")
-	fmt.Println(query)
 	return query, values
 }
 
@@ -104,7 +103,7 @@ func (f *feiraStorePostgres) Create(item domain.FeiraLivre) (uint64, error) {
 		item.CodDist,
 		item.Distrito,
 		item.CodSubPref,
-		item.SubPref,
+		item.SubPrefe,
 		item.Regiao5,
 		item.Regiao8,
 		item.NomeFeira,
@@ -153,7 +152,7 @@ func (f *feiraStorePostgres) Update(id uint64, item domain.FeiraLivre) (*domain.
 		item.CodDist,
 		item.Distrito,
 		item.CodSubPref,
-		item.SubPref,
+		item.SubPrefe,
 		item.Regiao5,
 		item.Regiao8,
 		item.NomeFeira,

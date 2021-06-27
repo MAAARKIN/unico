@@ -18,15 +18,15 @@ var feira = domain.FeiraLivre{
 	CodDist:    87,
 	Distrito:   "VILA FORMOSA",
 	CodSubPref: 26,
-	SubPref:    "ARICANDUVA-FORMOSA-CARRAO",
+	SubPrefe:   "ARICANDUVA-FORMOSA-CARRAO",
 	Regiao5:    "Leste",
 	Regiao8:    "Leste 1",
 	NomeFeira:  "VILA FORMOSA",
 	Registro:   "4041-0",
 	Logradouro: "RUA MARAGOJIPE",
-	Numero:     "S/N",
-	Bairro:     "VL FORMOSA",
-	Referencia: "TV RUA PRETORIA",
+	Numero:     nil,
+	Bairro:     nil,
+	Referencia: nil,
 }
 
 func TestGetAllFeiras(t *testing.T) {
@@ -137,15 +137,15 @@ func TestUpdateFeiraWithAnotherRegistro(t *testing.T) {
 		CodDist:    87,
 		Distrito:   "VILA FORMOSA",
 		CodSubPref: 26,
-		SubPref:    "ARICANDUVA-FORMOSA-CARRAO",
+		SubPrefe:   "ARICANDUVA-FORMOSA-CARRAO",
 		Regiao5:    "Leste",
 		Regiao8:    "Leste 1",
 		NomeFeira:  "VILA FORMOSA",
 		Registro:   "4041-1",
 		Logradouro: "RUA MARAGOJIPE",
-		Numero:     "S/N",
-		Bairro:     "VL FORMOSA",
-		Referencia: "TV RUA PRETORIA",
+		Numero:     nil,
+		Bairro:     nil,
+		Referencia: nil,
 	}
 
 	storeMock.On("Update", uint64(1), feiraToUpdate).Return(&feiraToUpdate, nil)
@@ -174,15 +174,15 @@ func TestUpdateFeira(t *testing.T) {
 		CodDist:    87,
 		Distrito:   "VILA FORMOSA",
 		CodSubPref: 26,
-		SubPref:    "ARICANDUVA-FORMOSA-CARRAO",
+		SubPrefe:   "ARICANDUVA-FORMOSA-CARRAO",
 		Regiao5:    "Leste",
 		Regiao8:    "Leste 1",
 		NomeFeira:  "VILA FORMOSA",
 		Registro:   "4041-1",
 		Logradouro: "RUA MARAGOJIPE",
-		Numero:     "S/N",
-		Bairro:     "VL FORMOSA",
-		Referencia: "TV RUA PRETORIA",
+		Numero:     nil,
+		Bairro:     nil,
+		Referencia: nil,
 	}
 
 	storeMock.On("GetByRegistro", feiraToUpdate.Registro).Return(&feira, nil)

@@ -110,9 +110,6 @@ func (f FeiraHandler) create(w http.ResponseWriter, r *http.Request) {
 // @Router /feiras/{id} [put]
 func (f FeiraHandler) update(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.ParseUint(chi.URLParam(r, "id"), 10, 64)
-
-	teste := chi.URLParam(r, "id")
-	fmt.Println(teste)
 	dto := domain.FeiraLivreUpdate{}
 	if err := helper.BindJson(r, &dto); err != nil {
 		helper.HandleError(w, err)
@@ -120,7 +117,6 @@ func (f FeiraHandler) update(w http.ResponseWriter, r *http.Request) {
 	}
 
 	entity := dto.ToDomain()
-	fmt.Println(id)
 	if _, err := f.service.Update(id, entity); err != nil {
 		helper.HandleError(w, err)
 	} else {
@@ -176,8 +172,8 @@ func (f FeiraHandler) get(w http.ResponseWriter, r *http.Request) {
 // @Title deleteFeiraByRegistro
 // @Tags Feiras
 // @Summary Delete a feira
-// @Description Delete a feira by id
-// @Param id path string true "The identifier for the feira"
+// @Description Delete a feira by registro
+// @Param registro path string true "The registro for the feira"
 // @Success 200 "Deleted"
 // @Failure 204 "Feira not found"
 // @Failure 400 "Bad request"
@@ -186,7 +182,7 @@ func (f FeiraHandler) get(w http.ResponseWriter, r *http.Request) {
 // @Router /feiras/registro/{registro} [delete]
 func (f FeiraHandler) deleteByRegistro(w http.ResponseWriter, r *http.Request) {
 	registro := chi.URLParam(r, "registro")
-
+	fmt.Println(registro)
 	if err := f.service.DeleteByRegistro(registro); err != nil {
 		helper.HandleError(w, err)
 	} else {

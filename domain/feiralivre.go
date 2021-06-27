@@ -9,23 +9,23 @@ import (
 var ErrFeiraWithRegistroAlreadyExist = errors.New("Feiralivre com esse registro já existe")
 
 type FeiraLivre struct {
-	Id         uint64 `json:"id"`
-	Long       int64  `json:"long"`
-	Lat        int64  `json:"lat"`
-	SetCens    int64  `json:"setCens"`
-	Areap      int64  `json:"areap"`
-	CodDist    uint64 `json:"codDist"`
-	Distrito   string `json:"distrito"`
-	CodSubPref uint64 `json:"codSubPref"`
-	SubPref    string `json:"subPref"`
-	Regiao5    string `json:"regiao5"`
-	Regiao8    string `json:"regiao8"`
-	NomeFeira  string `json:"nomeFeira"`
-	Logradouro string `json:"logradouro"`
-	Numero     string `json:"numero"`
-	Bairro     string `json:"bairro"`
-	Referencia string `json:"referencia"`
-	Registro   string `json:"registro"`
+	Id         uint64  `json:"id"`
+	Long       int64   `json:"long"`
+	Lat        int64   `json:"lat"`
+	SetCens    int64   `json:"setCens"`
+	Areap      int64   `json:"areap"`
+	CodDist    uint64  `json:"codDist"`
+	Distrito   string  `json:"distrito"`
+	CodSubPref uint64  `json:"codSubPref"`
+	SubPrefe   string  `json:"subPrefe"`
+	Regiao5    string  `json:"regiao5"`
+	Regiao8    string  `json:"regiao8"`
+	NomeFeira  string  `json:"nomeFeira"`
+	Logradouro string  `json:"logradouro"`
+	Numero     *string `json:"numero"`
+	Bairro     *string `json:"bairro"`
+	Referencia *string `json:"referencia"`
+	Registro   string  `json:"registro"`
 }
 
 type FeiraFiltro struct {
@@ -44,22 +44,22 @@ func (f *FeiraFiltro) ToMap() map[string]interface{} {
 }
 
 type FeiraLivrePersist struct {
-	Long       int64  `json:"long"`
-	Lat        int64  `json:"lat"`
-	SetCens    int64  `json:"setCens"`
-	Areap      int64  `json:"areap"`
-	CodDist    uint64 `json:"codDist"`
-	Distrito   string `json:"distrito"`
-	CodSubPref uint64 `json:"codSubPref"`
-	SubPref    string `json:"subPref"`
-	Regiao5    string `json:"regiao5"`
-	Regiao8    string `json:"regiao8"`
-	NomeFeira  string `json:"nomeFeira"`
-	Registro   string `json:"registro"`
-	Logradouro string `json:"logradouro"`
-	Numero     string `json:"numero"`
-	Bairro     string `json:"bairro"`
-	Referencia string `json:"referencia"`
+	Long       int64   `json:"long"`
+	Lat        int64   `json:"lat"`
+	SetCens    int64   `json:"setCens"`
+	Areap      int64   `json:"areap"`
+	CodDist    uint64  `json:"codDist"`
+	Distrito   string  `json:"distrito"`
+	CodSubPref uint64  `json:"codSubPref"`
+	SubPrefe   string  `json:"subPrefe"`
+	Regiao5    string  `json:"regiao5"`
+	Regiao8    string  `json:"regiao8"`
+	NomeFeira  string  `json:"nomeFeira"`
+	Registro   string  `json:"registro"`
+	Logradouro string  `json:"logradouro"`
+	Numero     *string `json:"numero"`
+	Bairro     *string `json:"bairro"`
+	Referencia *string `json:"referencia"`
 }
 
 func (f *FeiraLivrePersist) ToDomain() FeiraLivre {
@@ -71,7 +71,7 @@ func (f *FeiraLivrePersist) ToDomain() FeiraLivre {
 		CodDist:    f.CodDist,
 		Distrito:   f.Distrito,
 		CodSubPref: f.CodSubPref,
-		SubPref:    f.SubPref,
+		SubPrefe:   f.SubPrefe,
 		Regiao5:    f.Regiao5,
 		Regiao8:    f.Regiao8,
 		NomeFeira:  f.NomeFeira,
@@ -84,21 +84,21 @@ func (f *FeiraLivrePersist) ToDomain() FeiraLivre {
 }
 
 type FeiraLivreUpdate struct {
-	Long       int64  `json:"long"`
-	Lat        int64  `json:"lat"`
-	SetCens    int64  `json:"setCens"`
-	Areap      int64  `json:"areap"`
-	CodDist    uint64 `json:"codDist"`
-	Distrito   string `json:"distrito"`
-	CodSubPref uint64 `json:"codSubPref"`
-	SubPref    string `json:"subPref"`
-	Regiao5    string `json:"regiao5"`
-	Regiao8    string `json:"regiao8"`
-	NomeFeira  string `json:"nomeFeira"`
-	Logradouro string `json:"logradouro"`
-	Numero     string `json:"numero"`
-	Bairro     string `json:"bairro"`
-	Referencia string `json:"referencia"`
+	Long       int64   `json:"long"`
+	Lat        int64   `json:"lat"`
+	SetCens    int64   `json:"setCens"`
+	Areap      int64   `json:"areap"`
+	CodDist    uint64  `json:"codDist"`
+	Distrito   string  `json:"distrito"`
+	CodSubPref uint64  `json:"codSubPref"`
+	SubPrefe   string  `json:"subPrefe"`
+	Regiao5    string  `json:"regiao5"`
+	Regiao8    string  `json:"regiao8"`
+	NomeFeira  string  `json:"nomeFeira"`
+	Logradouro string  `json:"logradouro"`
+	Numero     *string `json:"numero"`
+	Bairro     *string `json:"bairro"`
+	Referencia *string `json:"referencia"`
 }
 
 func (f *FeiraLivreUpdate) ToDomain() FeiraLivre {
@@ -110,7 +110,7 @@ func (f *FeiraLivreUpdate) ToDomain() FeiraLivre {
 		CodDist:    f.CodDist,
 		Distrito:   f.Distrito,
 		CodSubPref: f.CodSubPref,
-		SubPref:    f.SubPref,
+		SubPrefe:   f.SubPrefe,
 		Regiao5:    f.Regiao5,
 		Regiao8:    f.Regiao8,
 		NomeFeira:  f.NomeFeira,

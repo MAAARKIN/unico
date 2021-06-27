@@ -23,15 +23,15 @@ var feira = domain.FeiraLivre{
 	CodDist:    87,
 	Distrito:   "VILA FORMOSA",
 	CodSubPref: 26,
-	SubPref:    "ARICANDUVA-FORMOSA-CARRAO",
+	SubPrefe:   "ARICANDUVA-FORMOSA-CARRAO",
 	Regiao5:    "Leste",
 	Regiao8:    "Leste 1",
 	NomeFeira:  "VILA FORMOSA",
 	Registro:   "4041-0",
 	Logradouro: "RUA MARAGOJIPE",
-	Numero:     "S/N",
-	Bairro:     "VL FORMOSA",
-	Referencia: "TV RUA PRETORIA",
+	Numero:     nil,
+	Bairro:     nil,
+	Referencia: nil,
 }
 
 var persistFeira = domain.FeiraLivrePersist{
@@ -42,15 +42,15 @@ var persistFeira = domain.FeiraLivrePersist{
 	CodDist:    87,
 	Distrito:   "VILA FORMOSA",
 	CodSubPref: 26,
-	SubPref:    "ARICANDUVA-FORMOSA-CARRAO",
+	SubPrefe:   "ARICANDUVA-FORMOSA-CARRAO",
 	Regiao5:    "Leste",
 	Regiao8:    "Leste 1",
 	NomeFeira:  "VILA FORMOSA",
 	Registro:   "4041-0",
 	Logradouro: "RUA MARAGOJIPE",
-	Numero:     "S/N",
-	Bairro:     "VL FORMOSA",
-	Referencia: "TV RUA PRETORIA",
+	Numero:     nil,
+	Bairro:     nil,
+	Referencia: nil,
 }
 
 var updateFeira = domain.FeiraLivreUpdate{
@@ -61,14 +61,14 @@ var updateFeira = domain.FeiraLivreUpdate{
 	CodDist:    87,
 	Distrito:   "VILA FORMOSA",
 	CodSubPref: 26,
-	SubPref:    "ARICANDUVA-FORMOSA-CARRAO",
+	SubPrefe:   "ARICANDUVA-FORMOSA-CARRAO",
 	Regiao5:    "Leste",
 	Regiao8:    "Leste 1",
 	NomeFeira:  "VILA FORMOSA",
 	Logradouro: "RUA MARAGOJIPE",
-	Numero:     "S/N",
-	Bairro:     "VL FORMOSA",
-	Referencia: "TV RUA PRETORIA",
+	Numero:     nil,
+	Bairro:     nil,
+	Referencia: nil,
 }
 
 func TestGetAllFeiras(t *testing.T) {
@@ -94,7 +94,7 @@ func TestGetAllFeiras(t *testing.T) {
 		t.Errorf("handler returned wrong status code: got %v want %v", status, http.StatusOK)
 	}
 
-	expected := `[{"id":1,"long":-46550164,"lat":-23558733,"setCens":355030885000091,"areap":3550308005040,"codDist":87,"distrito":"VILA FORMOSA","codSubPref":26,"subPref":"ARICANDUVA-FORMOSA-CARRAO","regiao5":"Leste","regiao8":"Leste 1","nomeFeira":"VILA FORMOSA","logradouro":"RUA MARAGOJIPE","numero":"S/N","bairro":"VL FORMOSA","referencia":"TV RUA PRETORIA","registro":"4041-0"}]`
+	expected := `[{"id":1,"long":-46550164,"lat":-23558733,"setCens":355030885000091,"areap":3550308005040,"codDist":87,"distrito":"VILA FORMOSA","codSubPref":26,"subPrefe":"ARICANDUVA-FORMOSA-CARRAO","regiao5":"Leste","regiao8":"Leste 1","nomeFeira":"VILA FORMOSA","logradouro":"RUA MARAGOJIPE","numero":null,"bairro":null,"referencia":null,"registro":"4041-0"}]`
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v", rr.Body.String(), expected)
 	}

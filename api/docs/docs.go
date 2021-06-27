@@ -118,7 +118,7 @@ var doc = `{
         },
         "/feiras/registro/{registro}": {
             "delete": {
-                "description": "Delete a feira by id",
+                "description": "Delete a feira by registro",
                 "consumes": [
                     "application/json"
                 ],
@@ -129,8 +129,8 @@ var doc = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "The identifier for the feira",
-                        "name": "id",
+                        "description": "The registro for the feira",
+                        "name": "registro",
                         "in": "path",
                         "required": true
                     }
@@ -311,7 +311,7 @@ var doc = `{
                 "setCens": {
                     "type": "integer"
                 },
-                "subPref": {
+                "subPrefe": {
                     "type": "string"
                 }
             }
@@ -364,7 +364,7 @@ var doc = `{
                 "setCens": {
                     "type": "integer"
                 },
-                "subPref": {
+                "subPrefe": {
                     "type": "string"
                 }
             }
@@ -414,7 +414,7 @@ var doc = `{
                 "setCens": {
                     "type": "integer"
                 },
-                "subPref": {
+                "subPrefe": {
                     "type": "string"
                 }
             }

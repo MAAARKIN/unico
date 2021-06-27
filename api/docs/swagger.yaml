@@ -34,7 +34,7 @@ definitions:
         type: string
       setCens:
         type: integer
-      subPref:
+      subPrefe:
         type: string
     type: object
   domain.FeiraLivrePersist:
@@ -69,7 +69,7 @@ definitions:
         type: string
       setCens:
         type: integer
-      subPref:
+      subPrefe:
         type: string
     type: object
   domain.FeiraLivreUpdate:
@@ -102,7 +102,7 @@ definitions:
         type: string
       setCens:
         type: integer
-      subPref:
+      subPrefe:
         type: string
     type: object
 info:
@@ -245,11 +245,11 @@ paths:
     delete:
       consumes:
       - application/json
-      description: Delete a feira by id
+      description: Delete a feira by registro
       parameters:
-      - description: The identifier for the feira
+      - description: The registro for the feira
         in: path
-        name: id
+        name: registro
         required: true
         type: string
       responses:
